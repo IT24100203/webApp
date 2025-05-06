@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign Up Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Ceviche+One&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Peralta&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/signin.css" />
+</head>
+
+<body>
+
+<!-- Top Left RE-ES Logo -->
+<div class="re-es-logo-container">
+  <a href="homepage.html">RE-ES</a>
+</div>
+
+<div class="container">
+  <div class="image-section">
+    <img src="../img/wine.jpeg" alt="Candlelit dinner">
+  </div>
+  <div class="form-section">
+    <h2>Create New Account</h2>
+    <p>Already registered? <a href="login.html">LOGIN</a></p>
+    <hr />
+    <form onsubmit="return validateForm()">
+      <label for="name">Please enter your name</label>
+      <input type="text" id="name" required placeholder="Enter your name" />
+
+      <label for="email">Please enter Email</label>
+      <input type="email" id="email" required placeholder="Enter your email" />
+
+      <label for="phone">Please enter phone number</label>
+      <input type="tel" id="phone" required placeholder="Enter your phone number" />
+
+      <label for="password">Please enter password</label>
+      <input type="password" id="password" required placeholder="Enter your password" />
+
+      <label for="dob">Please enter date of birth</label>
+      <input type="date" id="dob" required />
+
+      <button type="submit">CREATE</button>
+    </form>
+  </div>
+</div>
+
+<script src="../js/signin.js"></script>
+</body>
+</html>

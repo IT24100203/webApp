@@ -1,0 +1,138 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Courier New', Courier, monospace;
+    height: 100vh;
+    display: flex;
+    background-color: white;
+}
+
+.left-side {
+    flex: 1;
+    background-color: #000;
+}
+
+.left-side img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+}
+
+.right-side {
+    flex: 1;
+    padding: 60px 80px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.logo {
+    position: absolute;
+    top: 30px;
+    left: 40px;
+    font-family: 'Ceviche One', cursive;
+    font-size: 28px;
+    text-decoration: none;
+    color: black;
+}
+
+h1 {
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+hr {
+    border: 1px solid #aaa;
+    width: 60%;
+    margin: 0 auto 40px auto;
+}
+
+.form-group {
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+}
+
+.form-group label {
+    width: 80px;
+    font-weight: bold;
+}
+
+.form-group input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background-color: #e6e6e6;
+    border-radius: 8px;
+    font-size: 18px;
+}
+
+.edit-icon {
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.logout-btn, .delete-btn {
+    font-family: "Peralta", serif;
+    margin-top: 20px;
+    font-size: 18px;
+    align-self: flex-end;
+    padding: 10px 25px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.logout-btn {
+    background: #f1ecff;
+    color: #000;
+}
+
+.logout-btn:hover {
+    background-color: black;
+    color: white;
+}
+
+.delete-btn {
+    background: #ffffff;
+    color: #a83a3a;
+    align-self: flex-start;
+}
+
+.delete-btn:hover {
+    background-color: #ca3434;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+
+    .left-side {
+        height: 300px;
+    }
+
+    .right-side {
+        padding: 40px 30px;
+    }
+
+    .form-group {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .form-group label {
+        margin-bottom: 6px;
+    }
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Profile</title>
+  <link href="https://fonts.googleapis.com/css2?family=Ceviche+One&family=Peralta&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/profile.css" />
+</head>
+<body>
+
+<div class="left-side">
+  <img src="../img/ppl.jpeg" alt="Candlelit dinner">
+</div>
+
+<div class="right-side">
+  <a href="homepage.html" class="logo">RE-ES</a>
+  <h1>Profile</h1>
+  <hr>
+
+  <div class="form-group">
+    <label for="name">Name:</label>
+    <input type="text" id="name" value="Your Name" readonly>
+    <span class="edit-icon" onclick="enableEdit('name')">✏️</span>
+    <span class="edit-icon" onclick="clearField('name')">🗑️</span>
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <input type="email" id="email" value="email@example.com" readonly>
+    <span class="edit-icon" onclick="enableEdit('email')">✏️</span>
+    <span class="edit-icon" onclick="clearField('email')">🗑️</span>
+  </div>
+
+  <button class="logout-btn">Log-out</button>
+  <button class="delete-btn" onclick="confirmDelete()">Delete Account</button>
+</div>
+
+<script src="../js/profile.js"></script>
+
+</body>
+</html>
