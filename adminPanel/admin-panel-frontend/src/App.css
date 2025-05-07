@@ -1,0 +1,98 @@
+
+/* ===== Global Layout and Theme ===== */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: white;
+  font-family: 'Segoe UI', sans-serif;
+  color: black;
+  font-size: 18px;
+}
+
+/* ===== Navigation Bar ===== */
+nav {
+  background-color: white;
+  border-bottom: 1px solid #ccc;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+nav img {
+  height: 50px;
+}
+
+nav a {
+  margin: 0 1rem;
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+}
+
+nav button {
+  padding: 8px 14px;
+  background-color: black;
+  color: white;
+  border: none;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* ===== Headings ===== */
+h1, h2, h3 {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 26px;
+}
+
+/* ===== Inputs and Buttons ===== */
+input, select {
+  padding: 10px;
+  font-size: 16px;
+  margin-right: 10px;
+  border-radius: 4px;
+  border: 1px solid #aaa;
+}
+
+button {
+  padding: 10px 16px;
+  background-color: black;
+  color: white;
+  border: none;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #222;
+}
+
+/* ===== Main Page Layout ===== */
+.container {
+  padding: 2rem;
+  max-width: 900px;
+  margin: auto;
+}
+
+/* ===== Lists and Items ===== */
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+li {
+  margin-bottom: 15px;
+}
+
+/* ===== Tables and Reports Styling ===== */
+.table-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #ccc;
+}
