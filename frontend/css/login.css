@@ -30,6 +30,16 @@ body {
     object-fit: cover;
 }
 
+.success-message {
+    background-color: #d4edda;
+    color: #165926;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
 .form-section {
     flex: 1;
     padding: 40px;
@@ -103,7 +113,7 @@ button:hover {
     position: absolute;
     top: 20px;
     left: 20px;
-    font-family: "Ceviche One";
+    font-family: "Ceviche One", serif;
     font-size: 28px;
     font-style: italic;
 }
