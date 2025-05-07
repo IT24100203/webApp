@@ -3,12 +3,12 @@ function validateForm() {
     const password = document.getElementById("password").value.trim();
 
     const users = [
-        { name: "Admin", email: "bimandibosilu@gmail.com", password: "admin123", role: "admin" },
-        { name: "User1", email: "user@example.com", password: "user1234", role: "admin" },
-        { name: "User2", email: "user@example.com", password: "user12345", role: "admin" },
-        { name: "User3", email: "user@example.com", password: "user123456", role: "admin" },
-        { name: "User4", email: "user@example.com", password: "user1234567", role: "admin" },
-        { name: "User5", email: "user@example.com", password: "user12345678", role: "admin" }
+        { name: "Admin", email: "bimandi@gmail.com", password: "bimandi123", role: "admin" },
+        { name: "User1", email: "thanuja@gmail.com", password: "thanuja123", role: "admin" },
+        { name: "User2", email: "kushani@gmail.com", password: "kushani123", role: "admin" },
+        { name: "User3", email: "tharushi@gmail.com", password: "tharushi123", role: "admin" },
+        { name: "User4", email: "keshali@gmail.com", password: "keshali123", role: "admin" },
+        { name: "User5", email: "abey@gmail.com", password: "abey123", role: "admin" }
     ];
 
     const user = users.find(u => u.email === email && u.password === password);
@@ -26,6 +26,23 @@ function validateForm() {
     }
 
     return false;
+}
+
+function handleLogin() {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    // Example condition — replace with actual logic
+    if (email === "admin@example.com" && password === "1234") {
+        document.getElementById('login-message').style.display = "block";
+
+        // Optional: Redirect after a short delay
+        setTimeout(() => {
+            window.location.href = "homepage.html";
+        }, 1500);
+    } else {
+        alert("Invalid login credentials");
+    }
 }
 
 function showAdminButton() {
