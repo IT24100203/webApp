@@ -1,98 +1,165 @@
-
-/* ===== Global Layout and Theme ===== */
-body {
-  margin: 0;
-  padding: 0;
+/* ===== Admin Panel Layout ===== */
+.admin-panel {
   background-color: white;
-  font-family: 'Segoe UI', sans-serif;
-  color: black;
-  font-size: 18px;
+  min-height: 100vh;
+  font-family: 'Playfair Display', serif;
 }
 
-/* ===== Navigation Bar ===== */
-nav {
-  background-color: white;
-  border-bottom: 1px solid #ccc;
-  padding: 1rem 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.dashboard-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  text-align: center;
 }
 
-nav img {
-  height: 50px;
-}
-
-nav a {
-  margin: 0 1rem;
-  font-size: 20px;
+.dashboard-title {
+  font-size: 36px;
   font-weight: bold;
-  color: black;
-  text-decoration: none;
+  margin-bottom: 2rem;
+  color: #111;
 }
 
-nav button {
-  padding: 8px 14px;
-  background-color: black;
-  color: white;
-  border: none;
+/* ===== Card Layout ===== */
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.card {
+  background-color: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  width: 250px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* ===== Text Styles in Cards ===== */
+.label {
   font-size: 16px;
-  border-radius: 6px;
-  cursor: pointer;
+  color: #555;
+  margin-bottom: 8px;
 }
 
-/* ===== Headings ===== */
-h1, h2, h3 {
-  margin-top: 1.5rem;
+.value {
+  font-size: 28px;
+  font-weight: 600;
+  color: #000;
+}
+
+.numeric {
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.status-breakdown h3 {
   margin-bottom: 1rem;
-  font-size: 26px;
+  font-size: 20px;
+  color: #333;
 }
 
-/* ===== Inputs and Buttons ===== */
-input, select {
-  padding: 10px;
-  font-size: 16px;
-  margin-right: 10px;
+.status-breakdown p {
+  font-size: 18px;
+  margin: 8px 0;
+  color: #000;
+}
+
+/* ===== Loading Text ===== */
+.loading {
+  font-size: 18px;
+  margin-top: 20px;
+  color: #888;
+}
+/* ===== Navbar Layout ===== */
+.navbar {
+  display: flex;
+  justify-content: space-between; /* ✅ logo left, buttons right */
+  align-items: center;
+  background-color: white;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #ccc;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  height: 40px;
   border-radius: 4px;
-  border: 1px solid #aaa;
+  cursor: pointer;
 }
 
-button {
-  padding: 10px 16px;
+.navbar-right {
+  display: flex;
+  gap: 12px;
+}
+
+.nav-button {
+  padding: 8px 16px;
   background-color: black;
   color: white;
   border: none;
   font-size: 16px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
   border-radius: 6px;
   cursor: pointer;
 }
 
-button:hover {
+.nav-button:hover {
   background-color: #222;
 }
 
-/* ===== Main Page Layout ===== */
-.container {
-  padding: 2rem;
-  max-width: 900px;
-  margin: auto;
-}
-
-/* ===== Lists and Items ===== */
-ul {
-  list-style: none;
-  padding-left: 0;
-}
-
-li {
-  margin-bottom: 15px;
-}
-
-/* ===== Tables and Reports Styling ===== */
-.table-row {
+.report-inputs {
+  margin-top: 1.5rem;
   display: flex;
-  justify-content: space-between;
+  gap: 12px;
   align-items: center;
-  padding: 10px 0;
-  border-bottom: 1px solid #ccc;
+  justify-content: flex-start;;
+  flex-wrap: wrap;
+}
+
+.report-date {
+  padding: 12px 16px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #aaa;
+  font-family: 'Playfair Display', serif;
+}
+
+.report-button {
+  padding: 12px 20px;
+  font-size: 16px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-family: 'Playfair Display', serif;
+  cursor: pointer;
+}
+
+.report-button:hover {
+  background-color: #222;
+}
+
+.purge-button {
+  margin-top: 1rem;
+  padding: 12px 20px;
+  font-size: 16px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-family: 'Playfair Display', serif;
+  cursor: pointer;
+}
+
+.purge-button:hover {
+  background-color: #222;
 }

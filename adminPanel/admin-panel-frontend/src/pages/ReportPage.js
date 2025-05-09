@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import { getReport, purgeReservations } from "../api/adminApi";
+import { useState } from "react";
+import { getReport } from "../api/dashboardApi";
 import Navbar from "../components/Navbar";
 
 export default function ReportPage() {
-    const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
+    const [date, setDate] = useState("");
     const [report, setReport] = useState(null);
 
     const fetchReport = async () => {
@@ -11,42 +11,30 @@ export default function ReportPage() {
         setReport(res.data);
     };
 
-    useEffect(() => {
-        fetchReport();
-    }, []);
-
-    const handlePurge = async () => {
-        if (window.confirm("Are you sure you want to purge old reservations?")) {
-            await purgeReservations();
-            alert("Old reservations purged.");
-        }
-    };
-
     return (
         <div>
             <Navbar />
-            <div className="container" style={{ padding: "30px", fontSize: "18px" }}>
-                <h1 style={{ marginBottom: "25px" }}>Utilization Report</h1>
+            <div style={{ padding: "30px" }}>
+                <h1>Generate Report</h1>
 
-                <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "25px" }}>
+                <div className="report-inputs">
                     <input
                         type="date"
                         value={date}
                         onChange={(e) => setDate(e.target.value)}
-                        style={{ fontSize: "16px", padding: "8px" }}
+                        className="report-date"
                     />
-                    <button onClick={fetchReport} style={{ padding: "8px 16px" }}>Get Report</button>
-                    <button onClick={handlePurge} style={{ padding: "8px 16px", backgroundColor: "black", color: "white" }}>
-                        Purge Old Reservations
+                    <button className="report-button" onClick={fetchReport}>
+                        Get Report
                     </button>
                 </div>
 
                 {report && (
-                    <div style={{ lineHeight: "2" }}>
-                        <div><strong>Date:</strong> {report.date}</div>
-                        <div><strong>Total Reservations:</strong> {report.totalReservations}</div>
-                        <div><strong>Total Tables:</strong> {report.totalTables}</div>
-                        <div><strong>Utilization Rate:</strong> {report.utilizationRate?.toFixed(1)}%</div>
+                    <div style={{ marginTop: "20px" }}>
+                        <p><strong>Date:</strong> <span className="numeric">{report.date}</span></p>
+                        <p><strong>Total Reservations:</strong> <span className="numeric">{report.totalReservations}</span></p>
+                        <p><strong>Total Tables:</strong> <span className="numeric">{report.totalTables}</span></p>
+                        <p><strong>Utilization Rate:</strong> <span className="numeric">{report.utilizationRate?.toFixed(2)}%</span></p>
                     </div>
                 )}
             </div>

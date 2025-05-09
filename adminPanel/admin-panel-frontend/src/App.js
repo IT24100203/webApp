@@ -1,22 +1,18 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import LoginPage from './pages/Login';
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import AdminDashboardPage from "./pages/AdminDashboardPage";
+import ReportPage from "./pages/ReportPage";
+import PurgePage from "./pages/PurgePage";
+import './App.css';
 
-import TablesPage from './pages/TablesPage';
-import ReservationsPage from './pages/ReservationsPage';
-import ReportPage from './pages/ReportPage';
-
-function App() {
+export default function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Navigate to="/login" />} />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/tables" element={<TablesPage />} />
-                <Route path="/reservations" element={<ReservationsPage />} />
+                <Route path="/" element={<Navigate to="/dashboard" />} />
+                <Route path="/dashboard" element={<AdminDashboardPage />} />
                 <Route path="/report" element={<ReportPage />} />
+                <Route path="/purge" element={<PurgePage />} />
             </Routes>
         </BrowserRouter>
     );
 }
-
-export default App;

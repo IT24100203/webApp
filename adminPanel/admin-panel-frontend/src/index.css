@@ -1,24 +1,21 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+
+* {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: white; /* ✅ White background */
-  color: black;             /* ✅ Black text */
+  padding: 0;
+  box-sizing: border-box;
 }
 
-a {
+body {
+  font-family: 'Playfair Display', serif;
+  background-color: white;
   color: black;
-  text-decoration: none;
+  font-size: 18px;
+  line-height: 1.6;
 }
 
-button {
-  background-color: black;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #333;
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
