@@ -9,11 +9,12 @@ public class Reservation {
     private int tableId;
     private LocalDate date;
     private LocalTime time;
-    private String status;
+    private String status; // PENDING, SEATED, CANCELLED
 
     public Reservation() {}
 
-    public Reservation(int id, String customerName, int tableId, LocalDate date, LocalTime time, String status) {
+    public Reservation(int id, String customerName, int tableId,
+                       LocalDate date, LocalTime time, String status) {
         this.id = id;
         this.customerName = customerName;
         this.tableId = tableId;
@@ -22,21 +23,26 @@ public class Reservation {
         this.status = status;
     }
 
+    // Getters and setters (Encapsulation)
     public int getId() { return id; }
-    public String getCustomerName() { return customerName; }
-    public int getTableId() { return tableId; }
-    public LocalDate getDate() { return date; }
-    public LocalTime getTime() { return time; }
-    public String getStatus() { return status; }
-
     public void setId(int id) { this.id = id; }
+
+    public String getCustomerName() { return customerName; }
     public void setCustomerName(String name) { this.customerName = name; }
+
+    public int getTableId() { return tableId; }
     public void setTableId(int tableId) { this.tableId = tableId; }
+
+    public LocalDate getDate() { return date; }
     public void setDate(LocalDate date) { this.date = date; }
+
+    public LocalTime getTime() { return time; }
     public void setTime(LocalTime time) { this.time = time; }
+
+    public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
 
-    // File IO helpers
+    // File I/O conversion
     public static Reservation fromLine(String line) {
         String[] parts = line.split("\\|");
         return new Reservation(
