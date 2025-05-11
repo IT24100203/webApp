@@ -1,2 +1,0 @@
-alice,1234
-bob,secret
