@@ -1,0 +1,165 @@
+/* ===== Admin Panel Layout ===== */
+.admin-panel {
+  background-color: white;
+  min-height: 100vh;
+  font-family: 'Playfair Display', serif;
+}
+
+.dashboard-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.dashboard-title {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: #111;
+}
+
+/* ===== Card Layout ===== */
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.card {
+  background-color: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  width: 250px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* ===== Text Styles in Cards ===== */
+.label {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.value {
+  font-size: 28px;
+  font-weight: 600;
+  color: #000;
+}
+
+.numeric {
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.status-breakdown h3 {
+  margin-bottom: 1rem;
+  font-size: 20px;
+  color: #333;
+}
+
+.status-breakdown p {
+  font-size: 18px;
+  margin: 8px 0;
+  color: #000;
+}
+
+/* ===== Loading Text ===== */
+.loading {
+  font-size: 18px;
+  margin-top: 20px;
+  color: #888;
+}
+/* ===== Navbar Layout ===== */
+.navbar {
+  display: flex;
+  justify-content: space-between; /* ✅ logo left, buttons right */
+  align-items: center;
+  background-color: white;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #ccc;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  height: 40px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.navbar-right {
+  display: flex;
+  gap: 12px;
+}
+
+.nav-button {
+  padding: 8px 16px;
+  background-color: black;
+  color: white;
+  border: none;
+  font-size: 16px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.nav-button:hover {
+  background-color: #222;
+}
+
+.report-inputs {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: flex-start;;
+  flex-wrap: wrap;
+}
+
+.report-date {
+  padding: 12px 16px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #aaa;
+  font-family: 'Playfair Display', serif;
+}
+
+.report-button {
+  padding: 12px 20px;
+  font-size: 16px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-family: 'Playfair Display', serif;
+  cursor: pointer;
+}
+
+.report-button:hover {
+  background-color: #222;
+}
+
+.purge-button {
+  margin-top: 1rem;
+  padding: 12px 20px;
+  font-size: 16px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-family: 'Playfair Display', serif;
+  cursor: pointer;
+}
+
+.purge-button:hover {
+  background-color: #222;
+}
