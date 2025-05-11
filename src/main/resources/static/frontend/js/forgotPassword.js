@@ -8,8 +8,6 @@ function handleForgotPassword(event) {
         return false;
     }
 
-    alert("If this email exists in our system, a password reset link has been sent.");
-    // Here, you would typically send a request to your server or backend.
-
+    alert("Password reset functionality is not implemented on the server-side.");
     return false;
 }

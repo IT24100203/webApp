@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User List</title>
+  <link href="https://fonts.googleapis.com/css2?family=Ceviche+One&family=Peralta&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/userlist.css" />
+</head>
+<body>
+
+<div style="display: flex; justify-content: space-between; align-items: center;">
+  <a href="homepage.html" class="logo">RE-ES</a>
+  <a href="#" style="color: red; text-decoration: none; font-size: 17px;">Logout <span>↗</span></a>
+</div>
+
+<h1>Admin Dashboard</h1>
+<h2 style="margin-top: 30px;">User Management</h2>
+
+<table>
+  <thead style="background-color: #333; color: black;">
+  <tr>
+    <th>ID 📍</th>
+    <th>Name 🧑‍🏫</th>
+    <th>Email 📧</th>
+    <th>Role 👨‍🏫</th>
+    <th>Actions ⚙️</th>
+  </tr>
+  </thead>
+  <tbody id="userTable">
+  <!-- Dynamic user rows will be inserted here by userlist.js -->
+  </tbody>
+</table>
+
+<script src="../js/userlist.js"></script>
+
+</body>
+</html>
