@@ -43,6 +43,46 @@
   </tbody>
 </table>
 
+<div id="editUserModal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px; border: 1px solid #ccc; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); z-index: 1000;">
+  <h2>Edit User</h2>
+  <form id="editUserForm">
+    <input type="hidden" id="editUserEmail" name="email" readonly>
+    <div>
+      <label for="editUserName">Name:</label>
+      <input type="text" id="editUserName" name="name" required>
+    </div>
+    <div>
+      <label for="editUserPassword">Password:</label>
+      <input type="password" id="editUserPassword" name="password">
+    </div>
+    <div>
+      <label for="editUserPhone">Phone:</label>
+      <input type="text" id="editUserPhone" name="phone">
+    </div>
+    <div>
+      <label for="editUserDob">Date of Birth:</label>
+      <input type="date" id="editUserDob" name="dob">
+    </div>
+    <div>
+      <label for="editUserRole">Role:</label>
+      <select id="editUserRole" name="role">
+        <option value="admin">Admin</option>
+        <option value="user">User</option>
+      </select>
+    </div>
+    <div style="margin-top: 10px;">
+      <button type="button" onclick="saveEditedUser()">Save</button>
+      <button type="button" onclick="closeEditModal()">Cancel</button>
+    </div>
+  </form>
+</div>
+
+<div id="overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 999;"></div>
+
+<script src="../js/userlist.js"></script>
+</body>
+</html>
+
 <script src="../js/userlist.js"></script>
 </body>
 </html>

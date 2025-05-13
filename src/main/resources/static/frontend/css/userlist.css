@@ -51,7 +51,7 @@ th {
 
 th:nth-child(2), /* Name */
 th:nth-child(3)  /* Email */ {
-    width: 18%; /* Give Name and Email more width */
+    width: 18%;
 }
 
 th:nth-child(5),   /* Password */
@@ -60,6 +60,44 @@ td:nth-child(5) {
     opacity: 0.7;
 }
 
+#editUserModal div {
+    margin-bottom: 8px;
+}
+
+#editUserModal label {
+    display: inline-block;
+    width: 120px;
+    text-align: left;
+    margin-right: 10px;
+}
+
+#editUserModal input[type="text"],
+#editUserModal input[type="password"],
+#editUserModal input[type="date"],
+#editUserModal select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 200px;
+}
+
+#editUserModal button {
+    padding: 10px 15px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#editUserModal button:first-child {
+    background-color: #5cb85c;
+    color: white;
+}
+
+#editUserModal button:last-child {
+    background-color: #f44336;
+    color: white;
+}
 .actions span {
     cursor: pointer;
     margin-right: 10px;
