@@ -9,12 +9,15 @@
 </head>
 <body>
 
+<!-- Logo and Logout -->
 <div style="display: flex; justify-content: space-between; align-items: center;">
   <a href="homepage.html" class="logo">RE-ES</a>
   <a href="#" style="color: red; text-decoration: none; font-size: 17px;">Logout <span>↗</span></a>
 </div>
 
 <h1>Admin Dashboard</h1>
+
+<!-- User Management Table -->
 <h2 style="margin-top: 30px;">User Management</h2>
 
 <table>
@@ -23,16 +26,18 @@
     <th>ID 📍</th>
     <th>Name 🧑‍🏫</th>
     <th>Email 📧</th>
+    <th>Password 🔒</th>
+    <th>Phone 🔒</th>
+    <th>Date of Birth 🎂</th>
     <th>Role 👨‍🏫</th>
     <th>Actions ⚙️</th>
   </tr>
   </thead>
   <tbody id="userTable">
-  <!-- Dynamic user rows will be inserted here by userlist.js -->
+  <!-- Dynamic user data inserted by JS -->
   </tbody>
 </table>
 
 <script src="../js/userlist.js"></script>
-
 </body>
 </html>

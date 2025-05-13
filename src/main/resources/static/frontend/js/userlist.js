@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function loadUsers() {
-    fetch('/api/users')
+    fetch("/api/users")
         .then(response => {
             if (!response.ok) {
                 throw new Error("Failed to fetch users");
@@ -19,6 +19,9 @@ function loadUsers() {
                     <td>${index + 1}</td>
                     <td>${user.name}</td>
                     <td>${user.email}</td>
+                    <td>${user.password}</td>
+                    <td>${user.phone}</td>
+                    <td>${user.dob}</td>
                     <td>${user.role}</td>
                     <td class="actions">
                         <span title="Edit" onclick="editUser('${user.email}')">✏️</span>
@@ -30,10 +33,10 @@ function loadUsers() {
         })
         .catch(error => {
             console.error("Error loading user data:", error);
+            console.error("Error details:", error.message, error.stack);
             alert("Failed to load users.");
         });
 }
-
 
 function editUser(email) {
     alert("Edit user functionality not implemented.");
@@ -59,4 +62,5 @@ function deleteUser(email) {
                 alert("Failed to delete the user.");
             });
     }
+    document.addEventListener("DOMContentLoaded", loadUsers);
 }

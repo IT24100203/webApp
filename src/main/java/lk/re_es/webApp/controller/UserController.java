@@ -40,7 +40,9 @@ public class UserController {
             if (!file.exists()) {
                 return new ArrayList<>();
             }
-            return objectMapper.readValue(file, new TypeReference<List<User>>() {});
+            List<User> users = objectMapper.readValue(file, new TypeReference<List<User>>() {});
+            System.out.println("Users read from file: " + users); // Add this
+            return users;
         } catch (IOException e) {
             e.printStackTrace();
             return new ArrayList<>();
@@ -96,7 +98,7 @@ public class UserController {
                 if (user.getEmail().equalsIgnoreCase(loginRequest.getEmail())) {
                     if (user.getPassword().equals(loginRequest.getPassword())) {
 
-                        LoginResponse loginResponse = new LoginResponse(user.getName(), user.getEmail(), user.getRole());
+                        LoginResponse loginResponse = new LoginResponse(user.getName(), user.getEmail(), user.getRole(), user.getPassword(), user.getPassword(), user.getDob());
                         return ResponseEntity.ok(loginResponse);
                     } else {
                         return ResponseEntity.status(401).body("Incorrect password");

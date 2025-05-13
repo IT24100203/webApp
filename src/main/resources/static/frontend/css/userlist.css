@@ -2,6 +2,7 @@ body {
     font-family: 'Courier New', Courier, monospace;
     background-color: white;
     padding: 40px;
+    overflow-x: auto;
 }
 
 .logo {
@@ -26,13 +27,24 @@ table {
 }
 
 th, td {
-    padding: 15px;
+    padding: 10px;
     text-align: left;
     border-bottom: 1px solid #ccc;
 }
 
 th {
     background-color: #f1ecff;
+}
+
+th:nth-child(2), /* Name */
+th:nth-child(3)  /* Email */ {
+    width: 18%; /* Give Name and Email more width */
+}
+
+th:nth-child(5),   /* Password */
+td:nth-child(5) {
+    font-family: monospace;
+    opacity: 0.7;
 }
 
 .actions span {
