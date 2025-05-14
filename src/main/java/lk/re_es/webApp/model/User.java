@@ -1,40 +1,18 @@
 package lk.re_es.webApp.model;
 
-public class User {
-    private String name;
-    private String email;
+
+public class User extends Person {
     private String password;
-    private String phone;
-    private String dob;
     private String role;
 
-
     public User() {
+        super();
     }
 
-    public User(String name, String email, String password, String phone, String dob, String role) {
-        this.name = name;
-        this.email = email;
+    public User(Long id, String name, String email, String phone, String dob, String password, String role) {
+        super(id, name, email, phone, dob);
         this.password = password;
-        this.phone = phone;
-        this.dob = dob;
         this.role = role;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getPassword() {
@@ -45,27 +23,28 @@ public class User {
         this.password = password;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getDob() {
-        return dob;
-    }
-
-    public void setDob(String dob) {
-        this.dob = dob;
-    }
-
     public String getRole() {
         return role;
     }
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    @Override
+    public String getDetails() {
+        return super.getDetails() + ", Role: " + role;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + getId() +
+                ", name='" + getName() + '\'' +
+                ", email='" + getEmail() + '\'' +
+                ", phone='" + getPhone() + '\'' +
+                ", dob='" + getDob() + '\'' +
+                ", role='" + role + '\'' +
+                '}';
     }
 }

@@ -12,7 +12,6 @@ import java.util.List;
 import lk.re_es.webApp.model.User;
 import lk.re_es.webApp.dto.LoginResponse;
 
-
 @RestController
 @CrossOrigin
 @RequestMapping("/api/users")
@@ -40,7 +39,8 @@ public class UserController {
             if (!file.exists()) {
                 return new ArrayList<>();
             }
-            List<User> users = objectMapper.readValue(file, new TypeReference<List<User>>() {});
+            List<User> users = objectMapper.readValue(file, new TypeReference<List<User>>() {
+            });
             System.out.println("Users read from file: " + users); // Add this
             return users;
         } catch (IOException e) {
@@ -61,7 +61,14 @@ public class UserController {
     // Get all users (for admin or for viewing purposes)
     @GetMapping
     public ResponseEntity<List<User>> getUsers() throws IOException {
-        return ResponseEntity.ok(readUsersFromFile());
+        List<User> users = readUsersFromFile();
+
+        // Polymorphism in action: calling getDetails() on each user
+        for (User user : users) {
+            System.out.println(user.getDetails()); // Calls the overridden User's getDetails()
+        }
+
+        return ResponseEntity.ok(users);
     }
 
     // Add a new user
@@ -70,13 +77,18 @@ public class UserController {
         try {
             File file = getFile();
             List<User> users = file.exists()
-                    ? objectMapper.readValue(file, new TypeReference<List<User>>() {})
+                    ? objectMapper.readValue(file, new TypeReference<List<User>>() {
+            })
                     : new ArrayList<>();
 
             // Set default role if none is provided
             if (newUser.getRole() == null || newUser.getRole().trim().isEmpty()) {
                 newUser.setRole("user");
             }
+
+            // Generate a unique ID (simplified - consider a better approach in real app)
+            Long nextId = users.isEmpty() ? 1L : users.get(users.size() - 1).getId() + 1;
+            newUser.setId(nextId);
 
             users.add(newUser);
             objectMapper.writeValue(file, users);
@@ -98,7 +110,7 @@ public class UserController {
                 if (user.getEmail().equalsIgnoreCase(loginRequest.getEmail())) {
                     if (user.getPassword().equals(loginRequest.getPassword())) {
 
-                        LoginResponse loginResponse = new LoginResponse(user.getName(), user.getEmail(), user.getRole(), user.getPassword(), user.getPassword(), user.getDob());
+                        LoginResponse loginResponse = new LoginResponse(user.getName(), user.getEmail(), user.getPhone(), user.getPassword(), user.getDob(), user.getRole());
                         return ResponseEntity.ok(loginResponse);
                     } else {
                         return ResponseEntity.status(401).body("Incorrect password");
@@ -114,8 +126,6 @@ public class UserController {
         }
     }
 
-
-
     // Update a user (by email)
     @PutMapping("/{email}")
     public ResponseEntity<String> updateUser(@PathVariable String email, @RequestBody User updatedUser) {
@@ -124,6 +134,7 @@ public class UserController {
         for (int i = 0; i < users.size(); i++) {
             if (users.get(i).getEmail().equals(email)) {
                 updatedUser.setEmail(email);
+                updatedUser.setId(users.get(i).getId()); // Maintain the original ID!
                 users.set(i, updatedUser);
                 writeUsersToFile(users);
                 found = true;
@@ -166,6 +177,10 @@ public class UserController {
         if (user.getRole() == null || user.getRole().isEmpty()) {
             user.setRole("user"); // Default to "user" if no role is provided
         }
+
+        // Generate a unique ID (simplified - consider a better approach in real app)
+        Long nextId = users.isEmpty() ? 1L : users.get(users.size() - 1).getId() + 1;
+        user.setId(nextId);
 
         users.add(user);
         writeUsersToFile(users);
