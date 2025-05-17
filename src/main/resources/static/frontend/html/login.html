@@ -21,9 +21,12 @@
   <div class="form-section">
     <h2>Login</h2>
     <p>Login to continue</p>
+    <div id="login-message" class="success-message" style="display: none;">
+      Successfully logged in!!
+    </div>
     <hr>
-    <form onsubmit="return validateForm()">
-      <label for="email">Please enter Email</label>
+    <form id="login-form" onsubmit="return validateForm()">
+    <label for="email">Please enter Email</label>
       <input type="email" id="email" placeholder="Enter your email" required>
 
       <label for="password">Please enter password</label>
