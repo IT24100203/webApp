@@ -26,16 +26,12 @@ document.getElementById('login-form').addEventListener('submit', function(event)
             console.log("Logged in user data:", data);
 
             if (data && data.role) {
-                // If data and role exist, proceed with login
                 sessionStorage.setItem('currentUser', JSON.stringify(data));
 
                 if (data.role === "admin") {
-                    showAdminButton();
-                    alert('Login successful! Redirecting to admin page.');
-                    window.location.href = 'admin-users.html';
+                    window.location.href = '/frontend/html/userList.html';
                 } else {
-                    alert('Login successful! Redirecting to homepage.');
-                    window.location.href = 'homepage.html';
+                    window.location.href = '/frontend/html/homepage.html';
                 }
             } else {
                 throw new Error("Invalid user data received from API.");
@@ -46,17 +42,3 @@ document.getElementById('login-form').addEventListener('submit', function(event)
             alert('Login failed: ' + error.message);
         });
 });
-
-function showAdminButton() {
-    const adminBtn = document.createElement("a");
-    adminBtn.href = "admin-users.html";
-    adminBtn.textContent = "Manage Users";
-    adminBtn.className = "admin-btn";
-    document.getElementById("admin-section").appendChild(adminBtn);
-}
-
-// Show admin button if already logged in
-const loggedUser = JSON.parse(sessionStorage.getItem("currentUser"));
-if (loggedUser && loggedUser.role === "admin") {
-    showAdminButton();
-}

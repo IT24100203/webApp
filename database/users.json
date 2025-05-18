@@ -1,1 +1,89 @@
-[{"name":"Bimandi","email":"bimandibosilu@gmail.com","password":"admin123","phone":"0770378128","dob":"2003-07-14","role":"admin"},{"name":"Thanuja","email":"thanuja@gmail.com","password":"thanuja123","phone":"0710368128","dob":"2003-03-05","role":"admin"},{"name":"Kushani","email":"kushani@gmail.com","password":"kushani123","phone":"0710567128","dob":"2003-08-22","role":"admin"},{"name":"keshali","email":"keshali@gmail.com","password":"keshali123","phone":"0778728258","dob":"2003-01-19","role":"admin"},{"name":"Tharushi","email":"tharushi@gmail..com","password":"tharushi123","phone":"0718748127","dob":"2003-03-11","role":"admin"},{"name":"pabodha","email":"pabodha@gmail.com","password":"pabodha123","phone":"0758708147","dob":"2004-10-25","role":"admin"},{"name":"Julie","email":"juliedegores@gmail.com","password":"julie123","phone":"0703781248","dob":"2001-05-16","role":"user"},{"name":"Kavitha","email":"kavitha@gmail.com","password":"kavitha","phone":"0757094725","dob":"2006-01-31","role":"user"},{"name":"Aakifa","email":"aakifarumana@gmail.com","password":"aakifa123","phone":"0760378124","dob":"2002-08-09","role":"user"},{"name":"Dinusha","email":"dinushamewan@gmail.com","password":"dinusha123","phone":"0715892458","dob":"2001-11-15","role":"user"}]
+[ {
+  "id" : 1,
+  "createdAt" : [ 2025, 5, 18, 2, 8, 29, 946147200 ],
+  "updatedAt" : [ 2025, 5, 18, 2, 8, 29, 946147200 ],
+  "name" : "Bimandi ",
+  "email" : "bimandibosilu@gmail.com",
+  "phone" : "0770378128",
+  "dob" : "2003-07-14",
+  "password" : "admin123",
+  "role" : "admin",
+  "details" : "Name: Bimandi , Email: bimandibosilu@gmail.com"
+}, {
+  "id" : 2,
+  "createdAt" : [ 2025, 5, 18, 2, 8, 29, 946147200 ],
+  "updatedAt" : [ 2025, 5, 18, 2, 8, 29, 946147200 ],
+  "name" : "Thanuja",
+  "email" : "thanuja@gmail.com",
+  "phone" : "0468094725",
+  "dob" : "2003-02-19",
+  "password" : "thanuja123",
+  "role" : "admin",
+  "details" : "Name: Thanuja, Email: thanuja@gmail.com"
+}, {
+  "id" : 3,
+  "createdAt" : [ 2025, 5, 18, 2, 8, 29, 946147200 ],
+  "updatedAt" : [ 2025, 5, 18, 2, 8, 29, 946147200 ],
+  "name" : "Kushani",
+  "email" : "kushani@gmail.com",
+  "phone" : "0750372348",
+  "dob" : "2002-12-09",
+  "password" : "kushani123",
+  "role" : "admin",
+  "details" : "Name: Kushani, Email: kushani@gmail.com"
+}, {
+  "id" : 4,
+  "createdAt" : [ 2025, 5, 18, 2, 8, 29, 946147200 ],
+  "updatedAt" : [ 2025, 5, 18, 2, 8, 29, 946147200 ],
+  "name" : "Keshali",
+  "email" : "keshali@gmail.com",
+  "phone" : "0716528128",
+  "dob" : "2002-03-14",
+  "password" : "keshali123",
+  "role" : "admin",
+  "details" : "Name: Keshali, Email: keshali@gmail.com"
+}, {
+  "id" : 5,
+  "createdAt" : [ 2025, 5, 18, 2, 8, 29, 947148800 ],
+  "updatedAt" : [ 2025, 5, 18, 2, 8, 29, 947148800 ],
+  "name" : "Pabodha",
+  "email" : "pabodha@gmail.com",
+  "phone" : "0707031725",
+  "dob" : "2001-04-30",
+  "password" : "pabodha123",
+  "role" : "admin",
+  "details" : "Name: Pabodha, Email: pabodha@gmail.com"
+}, {
+  "id" : 6,
+  "createdAt" : [ 2025, 5, 18, 2, 8, 29, 947148800 ],
+  "updatedAt" : [ 2025, 5, 18, 2, 8, 29, 947148800 ],
+  "name" : "Tharushi",
+  "email" : "tharushi@gmail.com",
+  "phone" : "0706682135",
+  "dob" : "2000-04-25",
+  "password" : "tharushi123",
+  "role" : "admin",
+  "details" : "Name: Tharushi, Email: tharushi@gmail.com"
+}, {
+  "id" : 7,
+  "createdAt" : [ 2025, 5, 18, 2, 8, 29, 944152200 ],
+  "updatedAt" : [ 2025, 5, 18, 2, 8, 29, 944152200 ],
+  "name" : "Kavitha",
+  "email" : "kavitha@gmail.com",
+  "phone" : "0746298124",
+  "dob" : "2000-12-10",
+  "password" : "kavitha123",
+  "role" : "user",
+  "details" : "Name: Kavitha, Email: kavitha@gmail.com"
+}, {
+  "id" : 8,
+  "createdAt" : [ 2025, 5, 18, 2, 14, 47, 274010200 ],
+  "updatedAt" : [ 2025, 5, 18, 2, 14, 47, 274010200 ],
+  "name" : "Pasan",
+  "email" : "pasanh@gmail.com",
+  "phone" : "0770378888",
+  "dob" : "2002-11-12",
+  "password" : "pasan56",
+  "role" : "user",
+  "details" : "Name: Pasan, Email: pasanh@gmail.com"
+} ]

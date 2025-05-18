@@ -1,6 +1,8 @@
 package lk.re_es.webApp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User extends Person {
     private String password;
     private String role;
@@ -33,7 +35,7 @@ public class User extends Person {
 
     @Override
     public String getDetails() {
-        return super.getDetails() + ", Role: " + role;
+        return "Name: " + getName() + ", Email: " + getEmail();
     }
 
     @Override

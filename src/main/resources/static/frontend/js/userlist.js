@@ -35,10 +35,9 @@ function renderUserTable(users) {
             <td>${index + 1}</td>
             <td>${user.name}</td>
             <td>${user.email}</td>
-            <td>${user.password}</td>
+            <td>${user.role}</td>
             <td>${user.phone}</td>
             <td>${user.dob}</td>
-            <td>${user.role}</td>
             <td class="actions">
                 <span title="Edit" onclick="openEditModal('${user.email}')">✏️</span>
                 <span title="Delete" onclick="deleteUser('${user.email}')">🗑️</span>
@@ -110,7 +109,7 @@ function saveEditedUser() {
         })
         .then(data => {
             alert(data);
-            loadUsers(); // Reload the user list after editing
+            loadUsers();
             closeEditModal();
         })
         .catch(error => {
@@ -132,7 +131,7 @@ function deleteUser(email) {
             })
             .then(data => {
                 alert(data);
-                loadUsers();  // Correct placement: reload after successful deletion
+                loadUsers();
             })
             .catch(error => {
                 console.error("Error deleting user:", error);
