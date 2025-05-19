@@ -32,11 +32,11 @@ public class AdminDashboardServiceImpl implements AdminDashboardService {
         int totalTables = tables.size();
         double rate = totalTables > 0 ? (double) onDate.size() / totalTables * 100 : 0;
 
-        AuditLogger.getInstance().log("Generated detailed report for " + date);
+        AuditLogger.log("Generated detailed report for " + date);
 
         return new ReportDto(
                 date,
-                onDate.size(),       // total reservations
+                onDate.size(),
                 totalTables,
                 rate,
                 pending,
@@ -55,6 +55,6 @@ public class AdminDashboardServiceImpl implements AdminDashboardService {
                 .toList();
 
         FileHelper.writeList(RES_FILE, filtered, Reservation::toLine);
-        AuditLogger.getInstance().log("Purged old reservations");
+        AuditLogger.log("Purged old reservations");
     }
 }
