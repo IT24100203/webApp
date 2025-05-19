@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews - Restaurant Table Reservation System</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Restaurant Reservation</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="btn btn-home" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" th:href="@{/reviews}">All Reviews</a>
+                    </li>
+                    <li class="nav-item" th:if="${user != null}">
+                        <a class="nav-link" th:href="@{/my-reviews}">My Reviews</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <span class="system-title">Restaurant Table Reservation System - RE-ES</span>
+                    <div th:if="${user != null}">
+                        <span class="navbar-text me-3">Welcome, <span th:text="${user.name}"></span>!</span>
+                        <a class="btn btn-outline-light" th:href="@{/logout}">Logout</a>
+                    </div>
+                    <div th:if="${user == null}">
+                        <a class="btn btn-outline-light me-2" th:href="@{/login}">Login</a>
+                        <a class="btn btn-light" th:href="@{/register}">Register</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="page-title">Customer Reviews</h2>
+            <div th:if="${user != null}">
+                <a th:href="@{/reviews/add}" class="btn btn-success">
+                    <i class="fas fa-plus"></i> Add Review
+                </a>
+            </div>
+        </div>
+
+        <div th:if="${success}" class="alert alert-success" role="alert" th:text="${success}"></div>
+        <div th:if="${error}" class="alert alert-danger" role="alert" th:text="${error}"></div>
+
+        <div th:if="${#lists.isEmpty(reviews)}" class="alert alert-info">
+            No reviews available. Be the first to add a review for our restaurant!
+        </div>
+
+        <div class="row">
+            <div th:each="review : ${reviews}" class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0" th:text="${review.title}"></h5>
+                        <div class="rating">
+                            <span th:each="i : ${#numbers.sequence(1, review.rating)}">
+                                <i class="fas fa-star text-warning"></i>
+                            </span>
+                            <span th:if="${review.rating < 5}" th:each="i : ${#numbers.sequence(review.rating + 1, 5)}">
+                                <i class="far fa-star text-warning"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text" th:text="${review.content}"></p>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <small>By: <span th:text="${review.username}"></span></small>
+                            </div>
+                            <div>
+                                <small>
+                                    <span th:text="${#temporals.format(review.createdAt, 'dd MMM yyyy')}"></span>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script th:src="@{/js/script.js}"></script>
+</body>
+</html>
