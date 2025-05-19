@@ -5,19 +5,12 @@ import java.io.PrintWriter;
 import java.time.LocalDateTime;
 
 public class AuditLogger {
-    private static AuditLogger instance;
-    private final String file = "data/audit.txt";
+    private static final String file = "data/audit.txt";
 
-    private AuditLogger() {}
-
-    public static synchronized AuditLogger getInstance() {
-        if (instance == null) {
-            instance = new AuditLogger();
-        }
-        return instance;
+    private AuditLogger() {
     }
 
-    public void log(String msg) {
+    public static void log(String msg) {
         try (PrintWriter out = new PrintWriter(new FileWriter(file, true))) {
             out.println(LocalDateTime.now() + ": " + msg);
         } catch (Exception e) {
