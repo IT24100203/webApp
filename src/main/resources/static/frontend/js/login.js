@@ -1,4 +1,5 @@
 document.getElementById('login-form').addEventListener('submit', function(event) {
+    console.log('login triggered')
     event.preventDefault();
 
     const email = document.getElementById('email').value.trim();

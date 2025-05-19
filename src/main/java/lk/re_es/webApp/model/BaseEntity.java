@@ -2,14 +2,17 @@ package lk.re_es.webApp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class BaseEntity {
     private Long id;
+    private UUID uniqueId;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
     public BaseEntity() {
+        this.uniqueId =UUID.randomUUID();
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
