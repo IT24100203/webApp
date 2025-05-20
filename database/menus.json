@@ -1,0 +1,61 @@
+[ {
+  "id" : 1,
+  "name" : "salad",
+  "description" : "delicious delicious",
+  "price" : 850.0
+}, {
+  "id" : 2,
+  "name" : "pancake",
+  "description" : "Cheesy and delicious",
+  "price" : 400.0
+}, {
+  "id" : 3,
+  "name" : "cake",
+  "description" : "delicious",
+  "price" : 400.0
+}, {
+  "id" : 4,
+  "name" : "Pasta",
+  "description" : "delicious",
+  "price" : 2000.0
+}, {
+  "id" : 5,
+  "name" : "Pasta",
+  "description" : "delicious",
+  "price" : 2000.0
+}, {
+  "id" : 6,
+  "name" : "rice ",
+  "description" : "delicious",
+  "price" : 1500.0
+}, {
+  "id" : 7,
+  "name" : "koththu",
+  "description" : "delicious",
+  "price" : 1500.0
+}, {
+  "id" : 8,
+  "name" : "juice",
+  "description" : "......",
+  "price" : 450.0
+}, {
+  "id" : 9,
+  "name" : "burger",
+  "description" : "delicious",
+  "price" : 400.0
+}, {
+  "id" : 10,
+  "name" : "ice cream",
+  "description" : "different flavours",
+  "price" : 350.0
+}, {
+  "id" : 11,
+  "name" : "pizza",
+  "description" : "chicken",
+  "price" : 2000.0
+}, {
+  "id" : 12,
+  "name" : "noodles ",
+  "description" : "delicious",
+  "price" : 450.0
+} ]

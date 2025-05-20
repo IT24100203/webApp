@@ -80,3 +80,21 @@ header {
     position: relative;
     top: 90px;
 }
+
+.logout-btn {
+    background-color: #000000;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logout-btn:hover {
+    background-color: #101010;
+}

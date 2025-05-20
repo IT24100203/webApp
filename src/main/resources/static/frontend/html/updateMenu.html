@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 140px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e1e5eb;
+        }
+
+        h1 {
+            color: #2d3748;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .add-btn {
+            background-color: #4299e1;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .add-btn:hover {
+            background-color: #3182ce;
+        }
+
+        .menu-table {
+            width: 100%;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            border-collapse: collapse;
+            margin-top: 185px;
+        }
+
+        .menu-table th {
+            background-color: #f8fafc;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #4a5568;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .menu-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e2e8f0;
+            color: #4a5568;
+        }
+
+        .menu-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .menu-table tr:hover {
+            background-color: #f8fafc;
+        }
+
+        .menu-name {
+            font-weight: 500;
+            color: #2d3748;
+        }
+
+        .menu-description {
+            color: #4a5568;
+            max-width: 400px;
+        }
+
+        .menu-price {
+            font-weight: 600;
+            color: #38a169;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .edit-btn,
+        .delete-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .edit-btn {
+            color: #4299e1;
+        }
+
+        .delete-btn {
+            color: #e53e3e;
+        }
+
+        .edit-btn:hover,
+        .delete-btn:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s linear 0.25s, opacity 0.25s;
+        }
+
+        .modal-overlay.active {
+            visibility: visible;
+            opacity: 1;
+            transition-delay: 0s;
+        }
+
+        .modal {
+            background-color: white;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transform: scale(0.8);
+            transition: transform 0.25s;
+        }
+
+        .modal-overlay.active .modal {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #a0aec0;
+            transition: color 0.2s;
+        }
+
+        .close-modal:hover {
+            color: #4a5568;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            color: #4a5568;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #cbd5e0;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            transition: border-color 0.2s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #4299e1;
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
+        }
+
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .cancel-btn {
+            background-color: #e2e8f0;
+            color: #4a5568;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+
+        .cancel-btn:hover {
+            background-color: #cbd5e0;
+        }
+
+        .save-btn {
+            background-color: #4299e1;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+
+        .save-btn:hover {
+            background-color: #3182ce;
+        }
+
+        .alerts {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+        }
+
+        .alert {
+            padding: 12px 20px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 300px;
+            animation: slideIn 0.3s forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .alert-success {
+            background-color: #c6f6d5;
+            color: #276749;
+            border-left: 4px solid #38a169;
+        }
+
+        .alert-error {
+            background-color: #fed7d7;
+            color: #9b2c2c;
+            border-left: 4px solid #e53e3e;
+        }
+
+        .alert-icon {
+            font-size: 1.2rem;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top-color: #4299e1;
+            animation: spin 1s ease infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .table-loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+
+    <link rel="stylesheet" href="../css/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+Double+Pica:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
+
+
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="nav-links">
+                <a href="updateMenu.html">Menu management</a>
+                <a href="userList.html">User management</a>
+                <a href="#account" class="user-icon">
+                    <img src="../img/Black_User_Member_Guest_Icon-removebg-preview.png" alt="User Account"
+                        class="user-logo">
+                </a>
+                <a href="login.html">
+                    <button id="addMenuBtn" class="logout-btn">
+                        Logout
+                    </button>
+                </a>
+            </div>
+        </header>
+        <div class="header">
+            <h1>Menu Management</h1>
+          
+                <button id="addMenuBtn" class="add-btn">
+                    <a href="addMenu.html">
+                    <i class="fas fa-plus"></i> Add New Menu Item
+                </a>
+                </button>
+        </div>
+
+        <div id="tableContainer" class="table-loading">
+            <div class="loading-spinner"></div>
+            <span>Loading menu items...</span>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="modalTitle" class="modal-title">Edit Menu Item</h2>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <form id="menuForm">
+                <input type="hidden" id="menuId">
+                <div class="form-group">
+                    <label for="name">Menu Name</label>
+                    <input type="text" id="name" class="form-control" required placeholder="Enter menu name">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" class="form-control" required
+                        placeholder="Enter menu description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="price">Price (Rs.)</label>
+                    <input type="number" id="price" class="form-control" step="0.01" min="0" required
+                        placeholder="Enter price">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="cancel-btn" id="cancelBtn">Cancel</button>
+                    <button type="submit" class="save-btn">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="alerts" id="alertsContainer"></div>
+
+    <script>
+        // API Configuration
+        const API_URL = 'http://localhost:8080/api/menus';
+
+        // DOM Elements
+        const tableContainer = document.getElementById('tableContainer');
+        const editModal = document.getElementById('editModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const menuForm = document.getElementById('menuForm');
+        const menuIdInput = document.getElementById('menuId');
+        const nameInput = document.getElementById('name');
+        const descriptionInput = document.getElementById('description');
+        const priceInput = document.getElementById('price');
+        const addMenuBtn = document.getElementById('addMenuBtn');
+        const closeModal = document.getElementById('closeModal');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const alertsContainer = document.getElementById('alertsContainer');
+
+        // Show alert message
+        function showAlert(message, type = 'success') {
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type}`;
+
+            let icon = type === 'success'
+                ? '<i class="fas fa-check-circle alert-icon"></i>'
+                : '<i class="fas fa-exclamation-circle alert-icon"></i>';
+
+            alert.innerHTML = `
+                ${icon}
+                <span>${message}</span>
+            `;
+
+            alertsContainer.appendChild(alert);
+
+            // Remove alert after 3 seconds
+            setTimeout(() => {
+                alert.style.opacity = '0';
+                setTimeout(() => {
+                    alertsContainer.removeChild(alert);
+                }, 300);
+            }, 3000);
+        }
+
+        // Load menu items
+        async function loadMenuItems() {
+            try {
+                const response = await fetch(API_URL);
+
+                if (!response.ok) {
+                    throw new Error(`Server returned ${response.status} ${response.statusText}`);
+                }
+
+                const menuItems = await response.json();
+
+                if (menuItems.length === 0) {
+                    tableContainer.innerHTML = `
+                        <div style="text-align: center; padding: 40px; background: white; border-radius: 8px;">
+                            <p>No menu items available. Click "Add New Menu Item" to create your first menu.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                // Create the table
+                const table = document.createElement('table');
+                table.className = 'menu-table';
+
+                // Create table header
+                const tableHeader = document.createElement('thead');
+                tableHeader.innerHTML = `
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th style="width: 100px;">Actions</th>
+                    </tr>
+                `;
+
+                // Create table body
+                const tableBody = document.createElement('tbody');
+
+                menuItems.forEach(item => {
+                    const tr = document.createElement('tr');
+
+                    tr.innerHTML = `
+                        <td class="menu-name">${item.name}</td>
+                        <td class="menu-description">${item.description}</td>
+                        <td class="menu-price">Rs. ${item.price.toFixed(2)}</td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="edit-btn" data-id="${item.id}" title="Edit">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                            </div>
+                        </td>
+                    `;
+
+                    tableBody.appendChild(tr);
+                });
+
+                table.appendChild(tableHeader);
+                table.appendChild(tableBody);
+
+                // Clear the container and add the table
+                tableContainer.innerHTML = '';
+                tableContainer.appendChild(table);
+
+                // Add event listeners to edit buttons
+                document.querySelectorAll('.edit-btn').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const id = button.getAttribute('data-id');
+                        openEditModal(id);
+                    });
+                });
+
+                // Add event listeners to delete buttons
+                document.querySelectorAll('.delete-btn').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const id = button.getAttribute('data-id');
+                        // In a real app, you would implement delete functionality here
+                        // For this demo, we'll just show an alert
+                        showAlert('Delete functionality is not implemented in this demo.', 'error');
+                    });
+                });
+
+            } catch (error) {
+                console.error('Error loading menu items:', error);
+                tableContainer.innerHTML = `
+                    <div class="error" style="text-align: center; padding: 40px; background: #fed7d7; border-radius: 8px; color: #9b2c2c;">
+                        <p>Failed to load menu items.</p>
+                        <p>Error: ${error.message}</p>
+                        <p>Please check your server connection and try again.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Open edit modal
+        async function openEditModal(id) {
+            modalTitle.textContent = 'Edit Menu Item';
+
+            try {
+                // Fetch the menu item data
+                const response = await fetch(`${API_URL}/${id}`);
+
+                if (!response.ok) {
+                    throw new Error(`Server returned ${response.status} ${response.statusText}`);
+                }
+
+                const menuItem = await response.json();
+
+                // Populate the form
+                menuIdInput.value = menuItem.id;
+                nameInput.value = menuItem.name;
+                descriptionInput.value = menuItem.description;
+                priceInput.value = menuItem.price;
+
+                // Show the modal
+                editModal.classList.add('active');
+
+            } catch (error) {
+                console.error('Error fetching menu item:', error);
+                showAlert(`Failed to load menu item: ${error.message}`, 'error');
+            }
+        }
+
+        // Open add modal
+        function openAddModal() {
+            modalTitle.textContent = 'Add New Menu Item';
+
+            // Reset the form
+            menuForm.reset();
+            menuIdInput.value = '';
+
+            // Show the modal
+            editModal.classList.add('active');
+        }
+
+        // Close modal
+        function closeModalHandler() {
+            editModal.classList.remove('active');
+        }
+
+        // Handle form submission
+        async function handleFormSubmit(event) {
+            event.preventDefault();
+
+            const id = menuIdInput.value;
+            const isEditing = id !== '';
+
+            const menuData = {
+                name: nameInput.value,
+                description: descriptionInput.value,
+                price: parseFloat(priceInput.value)
+            };
+
+            try {
+                let response;
+
+                if (isEditing) {
+                    // Update existing menu item
+                    response = await fetch(`${API_URL}/${id}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(menuData)
+                    });
+                } else {
+                    // Create new menu item
+                    response = await fetch(API_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(menuData)
+                    });
+                }
+
+                if (!response.ok) {
+                    throw new Error(`Server returned ${response.status} ${response.statusText}`);
+                }
+
+                // Close the modal
+                closeModalHandler();
+
+                // Reload the menu items
+                loadMenuItems();
+
+                // Show success message
+                showAlert(isEditing ? 'Menu item updated successfully!' : 'Menu item added successfully!');
+
+            } catch (error) {
+                console.error('Error saving menu item:', error);
+                showAlert(`Failed to save menu item: ${error.message}`, 'error');
+            }
+        }
+
+        // Event Listeners
+        addMenuBtn.addEventListener('click', openAddModal);
+        closeModal.addEventListener('click', closeModalHandler);
+        cancelBtn.addEventListener('click', closeModalHandler);
+        menuForm.addEventListener('submit', handleFormSubmit);
+
+        // Close modal when clicking outside
+        editModal.addEventListener('click', (event) => {
+            if (event.target === editModal) {
+                closeModalHandler();
+            }
+        });
+
+        // Initialize the app
+        loadMenuItems();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Menu</title>
+    <link rel="stylesheet" href="../css/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+Double+Pica:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.1rem;
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        @media (max-width: 1000px) {
+            .menu-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .menu-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-img {
+            height: 200px;
+            background-color: #f0f0f0;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .card-description {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+
+        .card-price {
+            font-size: 1.4rem;
+            color: #e67e22;
+            font-weight: 600;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .error {
+            text-align: center;
+            padding: 30px;
+            background-color: #fee;
+            color: #c0392b;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .status-bar {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #2ecc71;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s, visibility 0.3s;
+            z-index: 100;
+        }
+
+        .status-bar.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .status-bar.error {
+            background-color: #e74c3c;
+        }
+        
+        .refresh-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s;
+            z-index: 100;
+        }
+        
+        .refresh-btn:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="nav-links">
+              <a href="#reservations">Reservations</a>
+              <a href="viewMenu.html">Menus</a>
+              <a href="login.html">Login</a>
+              <a href="#register">Register</a>
+              <a href="#account" class="user-icon">
+                <img src="../img/Black_User_Member_Guest_Icon-removebg-preview.png" alt="User Account" class="user-logo">
+              </a>
+            </div>
+        </header>
+
+        <h1>Our Restaurant Menu</h1>
+        <p class="subtitle">Discover our delicious offerings</p>
+
+        <div id="menu-container">
+            <div class="loading">Loading menu items...</div>
+        </div>
+    </div>
+
+    <div id="status-bar" class="status-bar">Connected to server</div>
+    <button id="refresh-btn" class="refresh-btn">Refresh Menu</button>
+
+    <script>
+        // Configuration
+        const API_URL = 'http://localhost:8080/api/menus';
+        
+        // DOM Elements
+        const menuContainer = document.getElementById('menu-container');
+        const statusBar = document.getElementById('status-bar');
+        const refreshBtn = document.getElementById('refresh-btn');
+        
+        // Food image collection - high-quality food images
+        const FOOD_IMAGES = [
+            'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=500&q=80', // Food platter
+            'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=500&q=80', // Colorful salad
+            'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?auto=format&fit=crop&w=500&q=80', // Pasta
+            'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=500&q=80', // Pizza
+            'https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=500&q=80', // Burger
+            'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=500&q=80', // Vegetable dish
+            'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=500&q=80', // Steak
+            'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=500&q=80', // Fish dish
+            'https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?auto=format&fit=crop&w=500&q=80', // Dessert
+            'https://images.unsplash.com/photo-1563379926898-05f4575a45d8?auto=format&fit=crop&w=500&q=80', // Soup
+            'https://images.unsplash.com/photo-1534766555764-ce878a5e3a2b?auto=format&fit=crop&w=500&q=80', // Noodles
+            'https://images.unsplash.com/photo-1602030638412-bb8dcc0bc8b0?auto=format&fit=crop&w=500&q=80'  // Curry
+        ];
+        
+        // Show status message
+        function showStatus(message, isError = false) {
+            statusBar.textContent = message;
+            statusBar.classList.add('show');
+            
+            if (isError) {
+                statusBar.classList.add('error');
+            } else {
+                statusBar.classList.remove('error');
+            }
+            
+            setTimeout(() => {
+                statusBar.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Get random food image
+        function getRandomFoodImage() {
+            const randomIndex = Math.floor(Math.random() * FOOD_IMAGES.length);
+            return FOOD_IMAGES[randomIndex];
+        }
+        
+        // Create consistent random image for a specific menu item
+        function getImageForMenu(menuId, menuName) {
+            // Create a simple hash from the menu ID and name to get consistent image per menu item
+            const hash = (menuId * 31 + menuName.length) % FOOD_IMAGES.length;
+            return FOOD_IMAGES[hash];
+        }
+        
+        // Create menu card
+        function createMenuCard(menu) {
+            // Get a random image but make it consistent for the same menu item
+            const imageUrl = menu.imageUrl || getImageForMenu(menu.id, menu.name);
+            
+            return `
+                <div class="menu-card">
+                    <div class="card-img" style="background-image: url('${imageUrl}')"></div>
+                    <div class="card-content">
+                        <h2 class="card-title">${menu.name}</h2>
+                        <p class="card-description">${menu.description}</p>
+                        <div class="card-price">Rs. ${menu.price.toFixed(2)}</div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Fetch menu items from API
+        async function fetchMenuItems() {
+            menuContainer.innerHTML = '<div class="loading">Loading menu items...</div>';
+            
+            try {
+                const response = await fetch(API_URL);
+                
+                if (!response.ok) {
+                    throw new Error(`Server returned ${response.status} ${response.statusText}`);
+                }
+                
+                const menuItems = await response.json();
+                
+                if (menuItems.length === 0) {
+                    menuContainer.innerHTML = '<div class="loading">No menu items available</div>';
+                    return;
+                }
+                
+                // Create the grid and add all menu cards
+                let menuGrid = '<div class="menu-grid">';
+                
+                menuItems.forEach(menu => {
+                    menuGrid += createMenuCard(menu);
+                });
+                
+                menuGrid += '</div>';
+                menuContainer.innerHTML = menuGrid;
+                
+                // showStatus('Menu loaded successfully');
+            } catch (error) {
+                console.error('Error fetching menu items:', error);
+                menuContainer.innerHTML = `
+                    <div class="error">
+                        <p>Failed to load menu items.</p>
+                        <p>Error: ${error.message}</p>
+                        <p>Please check your server connection and try again.</p>
+                    </div>
+                `;
+                
+                showStatus('Failed to connect to server', true);
+            }
+        }
+        
+        // Event listeners
+        refreshBtn.addEventListener('click', fetchMenuItems);
+        
+        // Initial load
+        document.addEventListener('DOMContentLoaded', fetchMenuItems);
+    </script>
+</body>
+</html>
