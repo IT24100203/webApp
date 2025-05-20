@@ -2,13 +2,43 @@ document.addEventListener("DOMContentLoaded", () => {
     loadUsers();
 
     const searchInput = document.getElementById("searchInput");
-    searchInput.addEventListener("input", filterUsers);
+    if (searchInput) {
+        searchInput.addEventListener("input", filterUsers);
+    }
+
+    // Add logout functionality
+    document.getElementById('logoutBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        // Clear the session storage
+        sessionStorage.removeItem('currentUser');
+        // Redirect to login page
+        window.location.href = 'login.html';
+    });
 });
+
+// Function to switch between sections
+function showSection(sectionName) {
+    // Hide all sections
+    document.querySelectorAll('.content-section').forEach(section => {
+        section.classList.remove('active');
+    });
+    
+    // Remove active class from all buttons
+    document.querySelectorAll('.nav-button').forEach(button => {
+        button.classList.remove('active');
+    });
+    
+    // Show selected section
+    document.getElementById(sectionName + 'Section').classList.add('active');
+    
+    // Add active class to clicked button
+    event.target.classList.add('active');
+}
 
 let allUsers = [];
 
 function loadUsers() {
-    fetch("/api/users")
+    fetch("http://localhost:8080/api/users")
         .then(response => {
             if (!response.ok) {
                 throw new Error("Failed to fetch users");
@@ -94,7 +124,7 @@ function saveEditedUser() {
 
     const updatedUser = { name, email, password, phone, dob, role };
 
-    fetch(`/api/users/${email}`, {
+    fetch(`http://localhost:8080/api/users/${email}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -120,7 +150,7 @@ function saveEditedUser() {
 
 function deleteUser(email) {
     if (confirm(`Are you sure you want to delete the user with email: ${email}?`)) {
-        fetch(`/api/users/${email}`, {
+        fetch(`http://localhost:8080/api/users/${email}`, {
             method: 'DELETE'
         })
             .then(response => {

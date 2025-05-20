@@ -43,7 +43,7 @@ function saveProfile() {
         email: updatedEmail
     };
 
-    fetch(`/api/users/${currentUser.email}`, {
+    fetch(`http://localhost:8080/api/users/${currentUser.email}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -77,7 +77,7 @@ function confirmDelete() {
 
     const confirmDelete = confirm("Are you sure you want to delete your account? This action cannot be undone.");
     if (confirmDelete) {
-        fetch(`/api/users/${currentUser.email}`, {
+        fetch(`http://localhost:8080/api/users/${currentUser.email}`, {
             method: 'DELETE'
         })
             .then(response => {

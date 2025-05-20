@@ -5,22 +5,23 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class BaseEntity {
+public abstract class BaseEntity {
     private Long id;
+    private String status;
     private UUID uniqueId;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public BaseEntity() {
-        this.uniqueId =UUID.randomUUID();
+    protected BaseEntity() {
+        this.uniqueId = UUID.randomUUID();
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
 
-    public BaseEntity(Long id) {
+    protected BaseEntity(Long id, String status) {
+        this();
         this.id = id;
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
+        this.status = status;
     }
 
     public Long getId() {
@@ -29,6 +30,22 @@ public class BaseEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public UUID getUniqueId() {
+        return uniqueId;
+    }
+
+    public void setUniqueId(UUID uniqueId) {
+        this.uniqueId = uniqueId;
     }
 
     public LocalDateTime getCreatedAt() {

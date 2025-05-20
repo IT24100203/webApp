@@ -6,15 +6,26 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class User extends Person {
     private String password;
     private String role;
+    private String status;
 
     public User() {
         super();
     }
 
-    public User(Long id, String name, String email, String phone, String dob, String password, String role) {
-        super(id, name, email, phone, dob);
+    public User(Long id, String name, String email, String phone, String password, String role, String status) {
+        super(id, name, email, phone, password, role, status);
         this.password = password;
         this.role = role;
+        this.status = status;
+    }
+
+    public User(Long id, String name, String email, String phone, String password) {
+        super(id, name, email, phone, password);
+    }
+
+    // Copy constructor
+    public User(User user) {
+        super(user);
     }
 
     public String getPassword() {
@@ -33,9 +44,17 @@ public class User extends Person {
         this.role = role;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public String getDetails() {
-        return "Name: " + getName() + ", Email: " + getEmail();
+        return "User Details - Name: " + getName() + ", Email: " + getEmail() + ", Role: " + getRole();
     }
 
     @Override
@@ -45,8 +64,8 @@ public class User extends Person {
                 ", name='" + getName() + '\'' +
                 ", email='" + getEmail() + '\'' +
                 ", phone='" + getPhone() + '\'' +
-                ", dob='" + getDob() + '\'' +
                 ", role='" + role + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 }

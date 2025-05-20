@@ -30,9 +30,9 @@ document.getElementById('login-form').addEventListener('submit', function(event)
                 sessionStorage.setItem('currentUser', JSON.stringify(data));
 
                 if (data.role === "admin") {
-                    window.location.href = '/frontend/html/userList.html';
+                    window.location.href = '/frontend/html/landing-page-admin.html';
                 } else {
-                    window.location.href = '/frontend/html/homepage.html';
+                    window.location.href = '/frontend/html/landing-page-user.html';
                 }
             } else {
                 throw new Error("Invalid user data received from API.");

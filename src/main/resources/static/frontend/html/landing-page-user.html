@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>User Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Ceviche+One&family=Peralta&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/userlist.css" />
+    <link rel="stylesheet" href="../css/landing-page-user.css" />
+</head>
+<body>
+
+<div class="header">
+    <a href="homepage.html" class="logo">RE-ES</a>
+    <div class="nav-buttons">
+        <button class="nav-button active">Reservation</button>
+        <a href="#" class="nav-button" id="logoutBtn">Logout</a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="form-section">
+        <h2>Make a Reservation</h2>
+        <form id="reservationForm">
+            <div class="form-group">
+                <label for="reservationName">Name:</label>
+                <input type="text" id="reservationName" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="reservationPhone">Phone number:</label>
+                <input type="tel" id="reservationPhone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="reservationEmail">E-mail:</label>
+                <input type="email" id="reservationEmail" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="reservationGuests">Number of Guests:</label>
+                <input type="number" id="reservationGuests" name="guests" min="1" max="10" required>
+            </div>
+            <div class="form-group">
+                <label for="reservationDate">Date:</label>
+                <input type="date" id="reservationDate" name="date" required>
+            </div>
+            <button type="button" class="submit-button" onclick="submitReservation()">Reserve Here</button>
+        </form>
+    </div>
+    <div class="image-section">
+        <img src="../img/reservation.jpg" alt="Restaurant Reservation" />
+    </div>
+</div>
+
+<script src="../js/landing-page-user.js"></script>
+
+</body>
+</html>

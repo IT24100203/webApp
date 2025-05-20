@@ -10,7 +10,7 @@ document.querySelector('form').addEventListener('submit', function (event) {
         role: "user"
     };
 
-    fetch('/api/users/register', {
+    fetch('http://localhost:8080/api/users/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

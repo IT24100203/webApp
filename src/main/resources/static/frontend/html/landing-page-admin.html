@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Ceviche+One&family=Peralta&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/userlist.css" />
+  <style>
+    .header {
+      background-color: #333;
+      padding: 1rem;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .nav-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .nav-button {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+    
+    .nav-button:hover {
+      background-color: #45a049;
+    }
+    
+    .nav-button.active {
+      background-color: #357abd;
+    }
+
+    .content-section {
+      display: none;
+      padding: 2rem;
+    }
+
+    .content-section.active {
+      display: block;
+    }
+
+    .reservation-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    .reservation-card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 1rem;
+    }
+
+    .reservation-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .status-badge {
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.875rem;
+      font-weight: bold;
+    }
+
+    .status-badge.pending {
+      background-color: #ffd700;
+      color: #000;
+    }
+
+    .status-badge.confirmed {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .status-badge.cancelled {
+      background-color: #f44336;
+      color: white;
+    }
+
+    .reservation-details p {
+      margin: 0.5rem 0;
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <a href="homepage.html" class="logo">RE-ES</a>
+  <div class="nav-buttons">
+    <button class="nav-button" id="reservationBtn">Reservation</button>
+    <button class="nav-button active" id="userManagementBtn">User Management</button>
+    <a href="#" class="nav-button" id="logoutBtn">Logout</a>
+  </div>
+</div>
+
+<div id="reservationSection" class="content-section">
+  <h1>Reservation Management</h1>
+  <div class="reservation-controls">
+    <input type="text" id="searchReservation" placeholder="Search reservations..." class="search-input">
+  </div>
+  <table>
+    <thead style="background-color: #333; color: white;">
+      <tr>
+        <th>ID 📍</th>
+        <th>Name 🧑‍🏫</th>
+        <th>Email 📧</th>
+        <th>Phone ☎️</th>
+        <th>Date 📅</th>
+        <th>Time ⏰</th>
+        <th>Guests 👥</th>
+        <th>Status 🚦</th>
+        <th>Actions ⚙️</th>
+      </tr>
+    </thead>
+    <tbody id="reservationTable">
+      <!-- Reservations will be loaded here -->
+    </tbody>
+  </table>
+</div>
+
+<div id="userManagementSection" class="content-section active">
+  <h1>Admin Dashboard</h1>
+  <h2 style="margin-top: 30px;">User Management</h2>
+
+  <table>
+    <thead style="background-color: #333; color: black;">
+    <tr>
+      <th>ID 📍</th>
+      <th>Name 🧑‍🏫</th>
+      <th>Email 📧</th>
+      <th>Role 👨‍🏫</th>
+      <th>Phone ☎️</th>
+      <th>Actions ⚙️</th>
+    </tr>
+    </thead>
+    <tbody id="userTable">
+    </tbody>
+  </table>
+</div>
+
+<div id="editUserModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeEditModal()">&times;</span>
+    <h2>Edit User</h2>
+    <form id="editUserForm">
+      <div>
+        <label for="editUserName">Name:</label>
+        <input type="text" id="editUserName" name="name">
+      </div>
+      <div>
+        <label for="editUserEmail">Email:</label>
+        <input type="text" id="editUserEmail" name="email" readonly>
+      </div>
+      <div>
+        <label for="editUserPassword">Password:</label>
+        <input type="password" id="editUserPassword" name="password">
+      </div>
+      <div>
+        <label for="editUserPhone">Phone:</label>
+        <input type="text" id="editUserPhone" name="phone">
+      </div>
+      <div>
+        <label for="editUserRole">Role:</label>
+        <select id="editUserRole" name="role">
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </select>
+      </div>
+      <button type="button" onclick="saveEditedUser()">Save</button>
+      <button type="button" onclick="closeEditModal()">Cancel</button>
+    </form>
+  </div>
+</div>
+
+<script src="../js/userlist.js"></script>
+<script src="../js/reservation.js"></script>
+
+</body>
+</html>
