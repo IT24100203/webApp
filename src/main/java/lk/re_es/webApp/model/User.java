@@ -3,6 +3,7 @@ package lk.re_es.webApp.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+
 public class User extends Person {
     private String password;
     private String role;

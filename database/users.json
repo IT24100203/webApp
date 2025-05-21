@@ -86,4 +86,15 @@
   "password" : "pasan56",
   "role" : "user",
   "details" : "Name: Pasan, Email: pasanh@gmail.com"
+}, {
+  "id" : 9,
+  "createdAt" : [ 2025, 5, 21, 10, 15, 5, 689206500 ],
+  "updatedAt" : [ 2025, 5, 21, 10, 15, 5, 689206500 ],
+  "name" : "Mandini",
+  "email" : "mandinisahansa@gmail.com",
+  "phone" : "0778978128",
+  "dob" : "2006-10-21",
+  "password" : "mandini123",
+  "role" : "user",
+  "details" : "Name: Mandini, Email: mandinisahansa@gmail.com"
 } ]
