@@ -2,6 +2,7 @@ body {
     font-family: 'Courier New', Courier, monospace;
     background-color: white;
     padding: 40px;
+    overflow-x: auto;
 }
 
 .logo {
@@ -18,6 +19,19 @@ h1 {
     margin-bottom: 20px;
 }
 
+.search-container {
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+#searchInput {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 400px;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -26,7 +40,7 @@ table {
 }
 
 th, td {
-    padding: 15px;
+    padding: 10px;
     text-align: left;
     border-bottom: 1px solid #ccc;
 }
@@ -35,6 +49,61 @@ th {
     background-color: #f1ecff;
 }
 
+td {
+    font-size: 20px;
+}
+
+th:nth-child(2),
+th:nth-child(3) {
+    width: 18%;
+}
+
+th:nth-child(5),
+td:nth-child(5) {
+    font-family: monospace;
+    opacity: 0.7;
+}
+
+#editUserModal div {
+    margin-bottom: 8px;
+}
+
+#editUserModal label {
+    display: inline-block;
+    width: 120px;
+    text-align: left;
+    margin-right: 10px;
+}
+
+#editUserModal input[type="text"],
+#editUserModal input[type="password"],
+#editUserModal input[type="date"],
+#editUserModal select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 200px;
+    font-size: 20px;
+}
+
+#editUserModal button {
+    padding: 10px 15px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+#editUserModal button:first-child {
+    background-color: #5cb85c;
+    color: white;
+}
+
+#editUserModal button:last-child {
+    background-color: #f44336;
+    color: white;
+}
 .actions span {
     cursor: pointer;
     margin-right: 10px;
@@ -43,4 +112,40 @@ th {
 
 .actions span:hover {
     color: red;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 20%;
+    font-size: 20px;
+    transform: scale(1.0);
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }

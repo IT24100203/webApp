@@ -43,14 +43,52 @@
     <th>Name 🧑‍🏫</th>
     <th>Email 📧</th>
     <th>Role 👨‍🏫</th>
+    <th>Phone ☎️</th>
+    <th>Date of Birth 🎂</th>
     <th>Actions ⚙️</th>
   </tr>
   </thead>
   <tbody id="userTable">
-  <!-- Dynamic user rows will be inserted here by userlist.js -->
   </tbody>
 </table>
 
+<div id="editUserModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeEditModal()">&times;</span>
+    <h2>Edit User</h2>
+    <form id="editUserForm">
+      <div>
+        <label for="editUserName">Name:</label>
+        <input type="text" id="editUserName" name="name">
+      </div>
+      <div>
+        <label for="editUserEmail">Email:</label>
+        <input type="text" id="editUserEmail" name="email" readonly>
+      </div>
+      <div>
+        <label for="editUserPassword">Password:</label>
+        <input type="password" id="editUserPassword" name="password">
+      </div>
+      <div>
+        <label for="editUserPhone">Phone:</label>
+        <input type="text" id="editUserPhone" name="phone">
+      </div>
+      <div>
+        <label for="editUserDob">Date of Birth:</label>
+        <input type="date" id="editUserDob" name="dob">
+      </div>
+      <div>
+        <label for="editUserRole">Role:</label>
+        <select id="editUserRole" name="role">
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </select>
+      </div>
+      <button type="button" onclick="saveEditedUser()">Save</button>
+      <button type="button" onclick="closeEditModal()">Cancel</button>
+    </form>
+  </div>
+</div>
 <script src="../js/userlist.js"></script>
 
 </body>
