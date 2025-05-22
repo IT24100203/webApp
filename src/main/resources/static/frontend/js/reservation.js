@@ -80,7 +80,7 @@ function renderReservationTable(reservations) {
             <td>${reservation.email}</td>
             <td>${reservation.phone}</td>
             <td>${formatDate(reservation.date)}</td>
-            <td>${formatTime(reservation.time)}</td>
+            <td>${formatTime(reservation.date)}</td>
             <td>${reservation.guests}</td>
             <td><span class="status-badge ${statusClass}">${reservation.status}</span></td>
             <td class="actions">
@@ -119,7 +119,7 @@ function filterReservations(event) {
             reservation.email.toLowerCase().includes(searchTerm) ||
             reservation.phone.toLowerCase().includes(searchTerm) ||
             formatDate(reservation.date).toLowerCase().includes(searchTerm) ||
-            formatTime(reservation.time).toLowerCase().includes(searchTerm) ||
+            formatTime(reservation.date).toLowerCase().includes(searchTerm) ||
             reservation.status.toLowerCase().includes(searchTerm)
         );
     });
@@ -214,6 +214,7 @@ function formatDate(dateString) {
     return new Date(dateString).toLocaleDateString(undefined, options);
 }
 
-function formatTime(timeString) {
-    return new Date(`2000-01-01T${timeString}`).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+function formatTime(dateString) {
+    const options = { hour: '2-digit', minute: '2-digit' };
+    return new Date(dateString).toLocaleTimeString(undefined, options);
 } 

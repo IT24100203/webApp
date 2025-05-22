@@ -1,6 +1,6 @@
 package lk.re_es.webApp.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Reservation extends BaseEntity {
     private String userId;
@@ -8,13 +8,13 @@ public class Reservation extends BaseEntity {
     private String phone;
     private String email;
     private int guests;
-    private LocalDate date;
+    private LocalDateTime date;
 
     public Reservation() {
         super();
     }
 
-    public Reservation(Long id, String userId, String name, String phone, String email, int guests, LocalDate date, String status) {
+    public Reservation(Long id, String userId, String name, String phone, String email, int guests, LocalDateTime date, String status) {
         super(id, status);
         this.userId = userId;
         this.name = name;
@@ -75,11 +75,11 @@ public class Reservation extends BaseEntity {
         this.guests = guests;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

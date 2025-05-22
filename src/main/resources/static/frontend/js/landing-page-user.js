@@ -20,9 +20,9 @@ function submitReservation() {
     const phone = document.getElementById("reservationPhone").value;
     const email = document.getElementById("reservationEmail").value;
     const guests = document.getElementById("reservationGuests").value;
-    const date = document.getElementById("reservationDate").value;
+    const dateTime = document.getElementById("reservationDate").value;
 
-    if (!name || !phone || !email || !guests || !date) {
+    if (!name || !phone || !email || !guests || !dateTime) {
         alert("Please fill in all fields");
         return;
     }
@@ -33,7 +33,7 @@ function submitReservation() {
         phone,
         email,
         guests: parseInt(guests),
-        date,
+        date: dateTime,
         status: "PENDING"
     };
 
@@ -56,6 +56,6 @@ function submitReservation() {
         })
         .catch(error => {
             console.error("Error creating reservation:", error);
-            alert("Failed to create reservation. Please try again.");
+            alert(error.message || "Failed to create reservation. Please try again.");
         });
 } 

@@ -13,10 +13,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.regex.Pattern;
 
 @RestController
 @CrossOrigin
@@ -25,6 +26,8 @@ public class ReservationController {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final AtomicLong idGenerator = new AtomicLong(1);
+    private static final Pattern EMAIL_PATTERN = Pattern.compile("^[A-Za-z0-9+_.-]+@(.+)$");
+    private static final Pattern PHONE_PATTERN = Pattern.compile("^\\d{10}$");
 
     public ReservationController() {
         this.objectMapper.registerModule(new JavaTimeModule());
@@ -64,9 +67,65 @@ public class ReservationController {
         }
     }
 
+    private ResponseEntity<?> validateReservation(Reservation reservation) {
+        // Check if all required fields are present
+        if (reservation.getUserId() == null || reservation.getUserId().trim().isEmpty()) {
+            return ResponseEntity.badRequest().body("User ID is required");
+        }
+        if (reservation.getName() == null || reservation.getName().trim().isEmpty()) {
+            return ResponseEntity.badRequest().body("Name is required");
+        }
+        if (reservation.getPhone() == null || reservation.getPhone().trim().isEmpty()) {
+            return ResponseEntity.badRequest().body("Phone number is required");
+        }
+        if (reservation.getEmail() == null || reservation.getEmail().trim().isEmpty()) {
+            return ResponseEntity.badRequest().body("Email is required");
+        }
+        if (reservation.getDate() == null) {
+            return ResponseEntity.badRequest().body("Date and time is required");
+        }
+
+        // Validate email format
+        if (!EMAIL_PATTERN.matcher(reservation.getEmail()).matches()) {
+            return ResponseEntity.badRequest().body("Invalid email format");
+        }
+
+        // Validate phone number format (10 digits)
+        if (!PHONE_PATTERN.matcher(reservation.getPhone()).matches()) {
+            return ResponseEntity.badRequest().body("Phone number must be 10 digits");
+        }
+
+        // Validate number of guests (between 1 and 10)
+        if (reservation.getGuests() < 1 || reservation.getGuests() > 10) {
+            return ResponseEntity.badRequest().body("Number of guests must be between 1 and 10");
+        }
+
+        // Validate reservation date (must be in the future)
+        LocalDateTime now = LocalDateTime.now();
+        if (reservation.getDate().isBefore(now)) {
+            return ResponseEntity.badRequest().body("Reservation date must be in the future");
+        }
+
+        // Check for overlapping reservations
+        List<Reservation> existingReservations = readReservationsFromFile();
+        for (Reservation existing : existingReservations) {
+            if (existing.getDate().equals(reservation.getDate())) {
+                return ResponseEntity.badRequest().body("A reservation already exists for this date and time");
+            }
+        }
+
+        return null; // No validation errors
+    }
+
     @PostMapping
     public ResponseEntity<?> createReservation(@RequestBody Reservation reservation) {
         try {
+            // Validate the reservation
+            ResponseEntity<?> validationResponse = validateReservation(reservation);
+            if (validationResponse != null) {
+                return validationResponse;
+            }
+
             List<Reservation> reservations = readReservationsFromFile();
             
             // Generate a unique ID for the reservation
